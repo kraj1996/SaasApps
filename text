@@ -1,0 +1,175 @@
+ const app = {
+    "ST_Ledgertransaction": {
+      "LedgerTransactionId": "0",//  "0"
+      "LedgerTransactionNo": "",// blank
+      "VendorId": "253", // supplier id
+      "TypeOfTnx": "Purchase", // Same hardcode
+      "PurchaseOrderNo": "",  //old po number
+      "GrossAmount": 0, // purschase rate IF * Paid Qty IF for all rows addition if rate is is 0 all value zero pr can not  able to typed 
+      "DiscountOnTotal": 0,// paid qty * discount amount  == sum for all rown if disaable cannot edit
+      "TaxAmount": 0,// Total gst amount  * qty =tax amount
+      "NetAmount": "0",// grn input feild 
+      "InvoiceAmount": 0,// invoice amount input blank then 0--------
+      ////////////"InvoiceNo": "",// invoce no input feild
+      "InvoiceDate": "",//input
+      "InvoiceAttachment": "0", // hardcode 0
+      "ChalanNo": "", //input
+      "ChalanDate": "", //input
+      "DiscountReason": "", //blank
+      "Remarks": "",// narration input
+      "IndentNo": "", // blank
+      "Freight": 0, // input
+      "Octori": 0, // input
+      "GatePassInWard": "", // gate entry input
+      "GatePassOutWard": "", // blank
+      "IsReturnable": "0", // hardcode"0"
+      "RoundOff": 0, // input round off
+      "LocationId": "3351", // // grn location------------
+      "IsDirectGRN": "1" // harcdcode "1"// 
+    },
+    "ST_NMStock": [// if for each row ther is freee qty grater than 0 than new row is added with new row with same values
+      {
+        "StockId": "0", //default zero
+        "ItemId": "317",//ItemId
+        "ItemName": "LIPC",//TypeName
+        "LedgerTransactionId": "0",// black
+        "LedgerTransactionNo": "",// blank
+        "BatchNumber": "",//input /row
+        "Rate": "10",//Rate // *purchase rate input feild // cannot be typed if got blank 
+        "DiscountPer": 0,//DiscountPer given
+        ---"DiscountAmount": 0,//input
+        "TaxPer": 5,// if igst = 0 then blank then cgst + igst otherwise igst 
+        ---"TaxAmount": 0, // per row total gst amount
+        ---"UnitPrice": "", //from row buy price
+        ---"MRP": "10", // purchase rate
+        ---"InitialCount": 0, // coverter * qty 
+        "ReleasedCount": "0",// hardcode 0
+        "PendingQty": "0", // hardcode 0
+        "RejectQty": "0",// hardcode 0
+        "ExpiryDate": "",// input
+        "Naration": "", // from input feild
+        "IsFree": "0", // hardcode 0
+        "LocationId": "3351",//LocationId
+        "PanelId": "688",//PanelId
+        "IndentNo": "", // blank
+        "FromLocationId": "0", // hardcode 0
+        "FromStockId": "0", // hardcode 0
+        "Reusable": "0", // hardcode 0
+        "ManufactureId": "54",//ManufactureId from item api
+        "MacID": "0-------",//machine id from item api
+        "MajorUnitId": "21",//MajorUnitId 
+        "MajorUnit": "Test-",//MajorUnitName 
+        "MinorUnitId": "21",//MinorUnitId
+        "MinorUnit":"",//MinorUnitName
+        "Converter": "1",//Converter
+        "Remarks": "Direct GRN Paid Item", // harcoded same "Direct GRN Paid Item"
+        "IsExpirable": "1",//IsExpirable 
+        "PackSize": "1*200",//PackSize
+        "IssueMultiplier": "1.",//IssueMultiplier
+        "BarcodeOption": "1",//BarcodeOption
+        "BarcodeGenrationOption": "2",//BarcodeGenrationOption
+        "IssueInFIFO": "1",//IssueInFIFO
+        "BarcodeNo": "",//BarcodeNo // input /row 
+        "MajorUnitInDecimal": "0",//MajorUnitInDecimal
+        "MinorUnitInDecimal": "0"//MinorUnitInDecimal
+      }
+    ],
+    "TaxData": [
+      // check 3 gst type if value of any is greate than 0 then object will bw created
+      {
+        "LedgerTransactionId": 0, // hardcode 0
+        "LedgerTransactionNo": "", //
+        "StockId": 0, 
+        "ItemId": "317",
+        "BatchNumber": "", //input
+        "TaxName": "CGST",
+        "Percentage": 2.5, // from input row
+        "TaxAmt": 0.25//
+      },
+      {
+        "LedgerTransactionId": 0,
+        "LedgerTransactionNo": "",
+        "StockId": 0,
+        "ItemId": "317",
+        "BatchNumber": "",
+        "TaxName": "SGST",
+        "Percentage": 2.5,
+        "TaxAmt": 0.25
+      },
+   
+    ],
+    "FileName": ""
+  }
+
+
+
+rate parameter
+date format wrong -
+
+
+
+batch no
+expiry date
+paid qty
+challan no
+date challan
+onvoice date
+invoice no
+
+let rowErrors = [];
+        updates.forEach((update) => {
+          if (update.BatchNumber === "") {
+            rowErrors[0] = 1;
+          }
+          if (update.ExpiryDate === "") {
+            rowErrors[1] = 1;
+          }
+          if (update.Rate === "") {
+            rowErrors[2] = 1;
+          }
+        });
+        console.log(rowErrors);
+
+
+          const payloadConst = {
+    Qutationno: "",
+    Quotationrefno: "",
+    VendorId: "",
+    VendorName: "",
+    VendorAddress: "",
+    VendorStateId: "",
+    VednorStateName: "",
+    VednorStateGstnno: "",
+    EntryDateFrom: "",
+    EntryDateTo: "",
+    DeliveryStateID: "",
+    DeliveryStateName: "",
+    DeliveryCentreID: "",
+    DeliveryCentreName: "",
+    DeliveryLocationID: "",
+    DeliveryLocationName: "",
+    ItemCategoryID: "",
+    ItemCategoryName: "",
+    ItemID: "",
+    ItemName: "",
+    HSNCode: "",
+    ManufactureID: "",
+    ManufactureName: "",
+    MachineID: "",
+    MachineName: "",
+    Rate: 0, // input
+    Qty: 0, // 1
+    DiscountPer: 0,
+    IGSTPer: 0, // if location id = state id then it will be 0 otherwise Gstntax
+    SGSTPer: 0, // if location id = state id then it will be Gstntax /2 otherwise 0
+    CGSTPer: 0, // if location id = state id then it will be Gstntax /2 otherwise 0
+    ConversionFactor: 0, // PackSize
+    PurchasedUnit: 0, // MajorUnitName
+    ConsumptionUnit: 0, // MinorUnitName
+    BuyPrice: 0, //
+    FreeQty: 0, // ""
+    DiscountAmt: 0, // cal
+    GSTAmount: 0, // cal
+    FinalPrice: 0, // netAmount
+    IsActive: "1",
+  };

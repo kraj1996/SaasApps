@@ -1,0 +1,31 @@
+{
+    "containers": {
+      "uat": {
+        "image": "",
+        "environment": {
+          "APP_ENV": "release",
+          "REACT_APP_PROXY_HOST" : "https://backend.elabpro.in",
+          "REACT_APP_Name":"eLabPro.IN",
+          "REACT_APP_firstName":"eLabPro",
+          "REACT_APP_lastName":".IN",
+          "REACT_APP_shortName":"eLP",
+          "REACT_APP_Version":"1.0.0"
+        },
+        "ports": {
+          "80": "HTTP"
+        }
+      }
+    },
+    "publicEndpoint": {
+      "containerName": "uat",
+      "containerPort": 8080,
+      "healthCheck": {
+        "healthyThreshold": 2,
+        "unhealthyThreshold": 2,
+        "timeoutSeconds": 5,
+        "intervalSeconds": 10,
+        "path": "/",
+        "successCodes": "200-499"
+      }
+    }
+  }
